@@ -1,5 +1,6 @@
 package com.example.apis.enums;
 
+import javax.validation.constraints.Size;
 
 public enum FormaPagto {
 	
@@ -16,4 +17,7 @@ public enum FormaPagto {
 		return tipo;
 	}
 
+	public String setTipo() {
+		return tipo;
+	}
 }
