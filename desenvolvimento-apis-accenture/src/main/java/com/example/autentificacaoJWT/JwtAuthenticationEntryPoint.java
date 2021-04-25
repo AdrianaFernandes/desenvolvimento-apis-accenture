@@ -1,4 +1,4 @@
-package com.example.apis.config;
+package com.example.autentificacaoJWT;
 
 import java.io.IOException;
 import java.io.Serializable;

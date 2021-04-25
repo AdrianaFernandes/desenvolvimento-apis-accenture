@@ -1,4 +1,4 @@
-package com.example.apis.model;
+package com.example.autentificacaoJWT.model;
 
 import java.io.Serializable;
 

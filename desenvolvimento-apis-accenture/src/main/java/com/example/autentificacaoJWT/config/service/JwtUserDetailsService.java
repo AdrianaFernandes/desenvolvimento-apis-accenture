@@ -1,4 +1,4 @@
-package com.example.apis.config.service;
+package com.example.autentificacaoJWT.config.service;
 
 import java.util.ArrayList;
 
@@ -14,10 +14,10 @@ import com.example.apis.model.Usuario;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
-	@Autowired
+	@Autowired //inicializa o objetos da class
 	private Usuario userService;
 
-	@Override
+	@Override //sobrescreve o metodo
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		com.bootstrap.springboot.model.User user = userService.getByLogin(login);
 

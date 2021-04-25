@@ -1,4 +1,4 @@
-package com.example.apis.controller;
+package com.example.autentificacaoJWT.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.apis.config.JwtTokenUtil;
-import com.example.apis.config.service.JwtUserDetailsService;
-import com.example.apis.model.JwtRequest;
-import com.example.apis.model.JwtResponse;
+import com.example.autentificacaoJWT.JwtTokenUtil;
+import com.example.autentificacaoJWT.config.service.JwtUserDetailsService;
+import com.example.autentificacaoJWT.model.JwtRequest;
+import com.example.autentificacaoJWT.model.JwtResponse;
 
 
 @RestController

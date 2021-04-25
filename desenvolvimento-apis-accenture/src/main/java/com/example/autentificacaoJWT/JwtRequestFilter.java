@@ -1,4 +1,4 @@
-package com.example.apis.config;
+package com.example.autentificacaoJWT;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.example.apis.config.service.JwtUserDetailsService;
+import com.example.autentificacaoJWT.config.service.JwtUserDetailsService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 

@@ -1,4 +1,4 @@
-package com.example.apis.config;
+package com.example.autentificacaoJWT;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
