@@ -2,6 +2,7 @@ package com.example.apis.controller;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -40,20 +41,27 @@ public class ClienteController {
 		List<Cliente> clientes = clienteRepository.findAll();
 
 		if (nome != null) {
-			clientes = clienteRepository.findByNome(nome.toUpperCase().trim());
+
+			clientes = clientes.stream().filter(cliente -> cliente.getNome().equals(nome.toUpperCase().trim()))
+					.collect(Collectors.toList());
 
 		}
 		if (cpfCnpj != null) {
-			clientes = clienteRepository.findByCpfCnpj(cpfCnpj.trim());
+
+			clientes = clientes.stream().filter(cliente -> cliente.getCpfCnpj().equals(cpfCnpj.toUpperCase().trim()))
+					.collect(Collectors.toList());
 
 		}
 		if (cidade != null) {
-			clientes = clienteRepository.findByCidade(cidade.toUpperCase().trim());
+
+			clientes = clientes.stream().filter(cliente -> cliente.getCidade().equals(cidade.toUpperCase().trim()))
+					.collect(Collectors.toList());
 
 		}
 		if (uf != null) {
-			clientes = clienteRepository.findByUf(uf.toUpperCase().trim());
 
+			clientes = clientes.stream().filter(cliente -> cliente.getUf().equals(uf.toUpperCase().trim()))
+					.collect(Collectors.toList());
 		}
 
 		return ClienteDto.converter(clientes);
@@ -77,7 +85,7 @@ public class ClienteController {
 	}
 
 	@PutMapping("/{id}")
-	@Transactional //valida a operação no banco de dados
+	@Transactional // valida a operação no banco de dados
 	public ResponseEntity<ClienteDto> atualizar(@PathVariable Long id,
 			@RequestBody @Valid AtualizacaoClienteForm form) {
 
@@ -87,7 +95,7 @@ public class ClienteController {
 	}
 
 	@DeleteMapping("/{id}")
-	@Transactional //valida a operação no banco de dados
+	@Transactional // valida a operação no banco de dados
 	public ResponseEntity<?> deletaCliente(@PathVariable Long id) {
 		clienteRepository.deleteById(id);
 		return ResponseEntity.ok().build();

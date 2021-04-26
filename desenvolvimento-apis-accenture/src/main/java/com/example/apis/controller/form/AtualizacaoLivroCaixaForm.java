@@ -16,9 +16,7 @@ public class AtualizacaoLivroCaixaForm {
 	
 	private BigDecimal valor;	
 	
-	private Cliente cliente;
-	
-	
+	private Cliente cliente;	
 
 	public String getDescricao() {
 		return descricao;

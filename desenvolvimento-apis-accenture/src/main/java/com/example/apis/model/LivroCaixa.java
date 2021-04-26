@@ -60,9 +60,7 @@ public class LivroCaixa {
 
 	public LivroCaixa() {
 		
-	}
-	
-	
+	}	
 
 	public LivroCaixa(String descricao, FormaPagto tipo, BigDecimal valor) {
 		

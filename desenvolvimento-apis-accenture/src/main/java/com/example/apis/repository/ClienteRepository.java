@@ -16,4 +16,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	
 	List<Cliente> findByUf(String uf);
 	
+	List<Cliente> findByNomeOrCpfCnpjOrCidadeOrUf(String nome, String cpfCnpj, String cidade, String uf);
+	
 }

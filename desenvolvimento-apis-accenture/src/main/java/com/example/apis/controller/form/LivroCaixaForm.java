@@ -2,13 +2,8 @@ package com.example.apis.controller.form;
 
 import java.math.BigDecimal;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import com.example.apis.enums.FormaPagto;
 import com.example.apis.model.LivroCaixa;
-import com.example.apis.model.Usuario;
 
 public class LivroCaixaForm {
 

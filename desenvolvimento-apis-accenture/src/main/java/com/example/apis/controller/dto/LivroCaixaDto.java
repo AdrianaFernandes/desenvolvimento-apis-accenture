@@ -73,8 +73,6 @@ public class LivroCaixaDto implements Serializable {
 		return serialVersionUID;
 	}
 	
-	
-
 	public Long getId() {
 		return id;
 	}

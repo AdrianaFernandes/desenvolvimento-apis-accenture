@@ -20,9 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.apis.controller.dto.LivroCaixaDto;
 import com.example.apis.controller.form.AtualizacaoLivroCaixaForm;
-import com.example.apis.controller.form.LivroCaixaForm;
 import com.example.apis.model.LivroCaixa;
-import com.example.apis.model.Usuario;
 import com.example.apis.repository.LivroCaixaRepository;
 
 @RestController
@@ -33,7 +31,7 @@ public class LivroCaixaController {
 	private LivroCaixaRepository livroCaixaRepository;
 
 	@GetMapping
-	public List<LivroCaixaDto> listaLivroCaixa(String descricao, String tipo, String valor) {
+	public List<LivroCaixaDto> listaLivroCaixa(String descricao, String tipo, String valor, Long idCliente) {
 
 		List<LivroCaixa> livrocaixas = livroCaixaRepository.findAll();
 
@@ -48,6 +46,10 @@ public class LivroCaixaController {
 		if (valor != null) {
 			livrocaixas = livroCaixaRepository.findByValor(valor);
 		}
+		
+		if (idCliente != null) {
+			livrocaixas = livroCaixaRepository.findByClienteId(idCliente);
+		}		
 
 		return LivroCaixaDto.converter(livrocaixas);
 	}
@@ -70,7 +72,7 @@ public class LivroCaixaController {
 //	}
 
 	public ResponseEntity<LivroCaixa> cadastrar(@RequestBody @Valid LivroCaixa form, UriComponentsBuilder uriBuilder) {	
-		System.out.println(form.toString());
+		
 		livroCaixaRepository.save(form);
 		URI uri = uriBuilder.path("/livroCaixa/{id}").buildAndExpand(form.getId()).toUri();
 		return ResponseEntity.created(uri).body(form);

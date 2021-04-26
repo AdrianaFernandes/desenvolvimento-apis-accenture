@@ -13,5 +13,6 @@ public interface LivroCaixaRepository extends JpaRepository<LivroCaixa, Long>{
 	List<LivroCaixa> findByTipo(String tipo);
 	
 	List<LivroCaixa> findByValor(String valor);
-
+	
+	List<LivroCaixa> findByClienteId(Long id);
 }
