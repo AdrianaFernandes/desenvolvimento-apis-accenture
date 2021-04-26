@@ -57,23 +57,29 @@ public class UsuarioController {
 		return new UsuarioDto(usuario);
 	}
 
-	@PostMapping // caastra usuario
-	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder) {
-		Usuario usuario = form.converter();
-		usuarioRepository.save(usuario);
-
-		URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
-		return ResponseEntity.created(uri).body(new UsuarioDto(usuario));
-	}
+	@PostMapping // cadastra usuario
+//	public ResponseEntity<Usuario> cadastrar(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder) {
+//		Usuario usuario = form.converter();
+//		usuarioRepository.save(usuario);
+//
+//		URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
+//		return ResponseEntity.created(uri).body(usuario);
+//	}
+	
+	public ResponseEntity<Usuario> cadastrar(@RequestBody @Valid Usuario form, UriComponentsBuilder uriBuilder) {
+		// Usuario usuario = form.converter();
+		usuarioRepository.save(form); URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(form.getId()).toUri();
+		return ResponseEntity.created(uri).body(form);
+		}
 
 	@PutMapping("/{id}") // atualiza usuario
 	@Transactional // valida a operação no banco de dados
-	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id,
+	public ResponseEntity<Usuario> atualizar(@PathVariable Long id,
 			@RequestBody @Valid AtualizacaoUsuarioForm form) {
 
 		Usuario dadosAtualizados = form.atualizar(id, usuarioRepository);
 
-		return ResponseEntity.ok(new UsuarioDto(dadosAtualizados));
+		return ResponseEntity.ok(dadosAtualizados);
 	}
 
 	@DeleteMapping("/{id}")

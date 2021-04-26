@@ -12,17 +12,11 @@ import com.example.apis.model.Usuario;
 
 public class LivroCaixaForm {
 
-	@Size(max = 30)
-	private String descricao;
-
-	@NotNull
-	@NotEmpty
-	@Size(min=1, max=1)
+	
+	private String descricao;	
+	
 	private FormaPagto tipo;
-
-	@NotNull
-	@NotEmpty
-	@Size
+	
 	private BigDecimal valor;
 
 	public String getDescricao() {

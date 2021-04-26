@@ -22,16 +22,16 @@ import com.example.apis.controller.dto.LivroCaixaDto;
 import com.example.apis.controller.form.AtualizacaoLivroCaixaForm;
 import com.example.apis.controller.form.LivroCaixaForm;
 import com.example.apis.model.LivroCaixa;
+import com.example.apis.model.Usuario;
 import com.example.apis.repository.LivroCaixaRepository;
 
 @RestController
 @RequestMapping("/livrocaixa")
 public class LivroCaixaController {
 
-
 	@Autowired
-	private LivroCaixaRepository livroCaixaRepository;	
-	
+	private LivroCaixaRepository livroCaixaRepository;
+
 	@GetMapping
 	public List<LivroCaixaDto> listaLivroCaixa(String descricao, String tipo, String valor) {
 
@@ -47,12 +47,11 @@ public class LivroCaixaController {
 		}
 		if (valor != null) {
 			livrocaixas = livroCaixaRepository.findByValor(valor);
-		}		
+		}
 
 		return LivroCaixaDto.converter(livrocaixas);
 	}
-	
-	
+
 	@GetMapping("/{id}")
 	public LivroCaixaDto detalhar(@PathVariable Long id) {
 
@@ -61,17 +60,24 @@ public class LivroCaixaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<LivroCaixaDto> cadastrar(@RequestBody @Valid LivroCaixaForm form, UriComponentsBuilder uriBuilder) {
+//	public ResponseEntity<LivroCaixaDto> cadastrar(@RequestBody @Valid LivroCaixaForm form, UriComponentsBuilder uriBuilder) {
+//
+//		LivroCaixa livrocaixas = form.converter();
+//		livroCaixaRepository.save(livrocaixas);
+//
+//		URI uri = uriBuilder.path("/cliente/{id}").buildAndExpand(livrocaixas.getId()).toUri();
+//		return ResponseEntity.created(uri).body(new LivroCaixaDto(livrocaixas));
+//	}
 
-		LivroCaixa livrocaixas = form.converter();
-		livroCaixaRepository.save(livrocaixas);
-
-		URI uri = uriBuilder.path("/cliente/{id}").buildAndExpand(livrocaixas.getId()).toUri();
-		return ResponseEntity.created(uri).body(new LivroCaixaDto(livrocaixas));
+	public ResponseEntity<LivroCaixa> cadastrar(@RequestBody @Valid LivroCaixa form, UriComponentsBuilder uriBuilder) {	
+		System.out.println(form.toString());
+		livroCaixaRepository.save(form);
+		URI uri = uriBuilder.path("/livroCaixa/{id}").buildAndExpand(form.getId()).toUri();
+		return ResponseEntity.created(uri).body(form);
 	}
-	
+
 	@PutMapping("/{id}")
-	@Transactional //valida a operação no banco de dados
+	@Transactional // valida a operação no banco de dados
 	public ResponseEntity<LivroCaixaDto> atualizar(@PathVariable Long id,
 			@RequestBody @Valid AtualizacaoLivroCaixaForm form) {
 
@@ -81,11 +87,10 @@ public class LivroCaixaController {
 	}
 
 	@DeleteMapping("/{id}")
-	@Transactional //valida a operação no banco de dados
+	@Transactional // valida a operação no banco de dados
 	public ResponseEntity<?> deletaLivroCaixa(@PathVariable Long id) {
 		livroCaixaRepository.deleteById(id);
 		return ResponseEntity.ok().build();
 	}
-	
-	
+
 }

@@ -1,9 +1,12 @@
 package com.example.apis.controller.form;
 
+import java.util.Optional;
+
 import javax.validation.constraints.Size;
 
 import com.example.apis.model.Usuario;
 import com.example.apis.repository.UsuarioRepository;
+
 
 public class AtualizacaoUsuarioForm {
 
@@ -62,26 +65,49 @@ public class AtualizacaoUsuarioForm {
 		this.email = email;
 	}
 
+//	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
+//
+//		Usuario usuario = usuarioRepository.getOne(id);
+//
+//		if (this.nome != null)
+//			usuario.setNome(this.nome);
+//
+//		if (this.login != null)
+//			usuario.setLogin(this.login);
+//
+//		if (this.senha != null)
+//			usuario.setSenha(this.senha);
+//
+//		if (this.telefone != null)
+//			usuario.setTelefone(this.telefone);
+//
+//		if (this.email != null)
+//			usuario.setEmail(this.email);
+//
+//		return usuario;
+//	}
+
 	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
 
-		Usuario usuario = usuarioRepository.getOne(id);
+		Optional<Usuario> user = usuarioRepository.findById(id);
 
-		if (this.nome != null)
+		if (user.isPresent()) {
+
+			Usuario usuario = user.get();
+
 			usuario.setNome(this.nome);
 
-		if (this.login != null)
 			usuario.setLogin(this.login);
 
-		if (this.senha != null)
 			usuario.setSenha(this.senha);
 
-		if (this.telefone != null)
 			usuario.setTelefone(this.telefone);
-
-		if (this.email != null)
 			usuario.setEmail(this.email);
 
-		return usuario;
+			return usuario;
+		} else {
+			return null;
+		}
 	}
 
 }

@@ -13,15 +13,4 @@ public enum Status {
 		return tipo;
 	}
 
-//	public static TipoStatus toEnum(String tipo) {
-//		if (tipo == null) {
-//			return null;
-//		}
-//		for (TipoStatus x : TipoStatus.values()) {
-//			if (tipo.equals(x.getDescricao())) {
-//				return x;
-//			}
-//		}
-//		throw new IllegalArgumentException("Acesso inválido");
-//	}
 }

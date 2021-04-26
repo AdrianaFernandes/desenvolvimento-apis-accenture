@@ -8,19 +8,14 @@ import com.example.apis.model.Usuario;
 
 public class UsuarioForm {
 
-	@NotNull
-	@NotEmpty
+
 	@Size(max = 30)
-	private String nome;
-
-	@NotNull
-	@NotEmpty
-	@Size(max = 14)
+	private String nome;	
+	
+	@Size(max = 15)
 	private String login;
-
-	@NotNull
-	@NotEmpty
-	@Size(max = 50)
+	
+	@Size(max = 10)
 	private String senha;
 
 	@Size(min = 11, max = 11)

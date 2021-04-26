@@ -29,27 +29,30 @@ public class Usuario {
 	
 	private LocalDateTime dataCadastro = LocalDateTime.now();
 	
-	@Column(name="nome", length=30, nullable=false, unique=false)
+	@Column(name="nome", length=30, nullable=false)
 	private String nome;
 	
 	@Column(name="login", length=15, nullable=false, unique=true)
 	private String login;
 	
-	@Column(name="senha", length=10, nullable=false, unique=false)
+	@Column(name="senha", length=10, nullable=false)
 	private String senha;
 	
-	@Column(name="telefone", length=11, unique=false)
+	@Column(name="telefone", length=11)
 	private String telefone;
 	
-	@Column(name="email", length=100, unique=false)
+	@Column(name="email", length=100)
 	private String email;
 	
 	@Enumerated(EnumType.STRING) //informa qual tipo de enum
-	@Column(name="perfil", length=1, nullable=false, unique=false)
+	@Column(name="perfil", length=1, nullable=false)
 	private Perfil perfil;
 	
-	@Column(name="status", length=1, nullable=false, unique=false)
+	@Column(name="status", length=1, nullable=false)
 	private Status status;
+	
+	public Usuario() {
+	}	
 	
 	public Usuario(String nome, String login, String senha, String telefone, String email) {
 	}	

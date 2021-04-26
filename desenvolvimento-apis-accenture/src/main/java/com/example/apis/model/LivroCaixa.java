@@ -7,14 +7,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.example.apis.enums.FormaPagto;
 
@@ -27,12 +28,14 @@ public class LivroCaixa {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //gera os numeros dos Id automatico
 	private Long id;
 	
-	@ManyToOne //muito registro para um cliente	
+	@ManyToOne (fetch = FetchType.LAZY) //muito registro para um cliente	
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;	
 	
-	private LocalDateTime dataLancamento = LocalDateTime.now();
+	@CreationTimestamp //recebe a data atual
+	private LocalDateTime dataLancamento;
 	
-	@Column(name="descricao", length=50, nullable=false, unique=false)
+	@Column(name="descricao", length=50, nullable=false)
 	private String descricao;
 	
 	@Enumerated(EnumType.STRING) //informa qual tipo de enum
@@ -43,9 +46,28 @@ public class LivroCaixa {
 	private BigDecimal valor;
 	
 
+	
+	public LivroCaixa(Cliente cliente, LocalDateTime dataLancamento, String descricao, FormaPagto tipo,
+			BigDecimal valor) {
+		
+		this.cliente = cliente;
+		this.dataLancamento = dataLancamento;
+		this.descricao = descricao;
+		this.tipo = tipo;
+		this.valor = valor;
+	}
+		
+
+	public LivroCaixa() {
+		
+	}
+	
+	
+
 	public LivroCaixa(String descricao, FormaPagto tipo, BigDecimal valor) {
 		
 	}
+
 
 	public Long getId() {
 		return id;
@@ -94,6 +116,13 @@ public class LivroCaixa {
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+
+	@Override
+	public String toString() {
+		return "LivroCaixa [descricao=" + descricao + ", tipo=" + tipo + ", valor=" + valor + "]";
+	}
+	
+	
 	
 	
 	

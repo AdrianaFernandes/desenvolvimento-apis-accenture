@@ -1,7 +1,5 @@
 package com.example.apis.enums;
 
-import javax.validation.constraints.Size;
-
 public enum FormaPagto {
 	
 	D("Débito"),
